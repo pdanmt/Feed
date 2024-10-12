@@ -36,9 +36,14 @@ export function Post({
   function addComment({ contentComment }: commentDataType) {
     const createdAt = String(new Date())
     const userRef = doc(db, '/users', user.uid)
-    const likes = 0
 
-    AddComment({ contentComment, createdAt, likes, userRef, postId: idOfPost })
+    AddComment({
+      contentComment,
+      createdAt,
+      likedBy: [],
+      userRef,
+      postId: idOfPost,
+    })
 
     reset()
   }

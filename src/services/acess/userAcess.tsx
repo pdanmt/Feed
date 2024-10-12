@@ -119,7 +119,7 @@ export async function GetPosts(
 interface addCommentProps {
   contentComment: string
   createdAt: string
-  likes: number
+  likedBy: string[]
   userRef: DocumentReference
   postId: string
 }
@@ -127,14 +127,14 @@ interface addCommentProps {
 export async function AddComment({
   contentComment,
   createdAt,
-  likes,
+  likedBy,
   userRef,
   postId,
 }: addCommentProps) {
   addDoc(collection(db, '/comments'), {
     contentComment,
     createdAt,
-    likes,
+    likedBy,
     userRef,
     postId,
   })
