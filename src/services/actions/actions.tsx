@@ -13,14 +13,21 @@ interface AddPostActionProps {
   contentPost: string
   createdAt: string
   userRef: DocumentReference
+  timestamp: Date
 }
 
 export async function AddPostAction({
   contentPost,
   userRef,
   createdAt,
+  timestamp,
 }: AddPostActionProps) {
-  await addDoc(collection(db, '/posts'), { contentPost, userRef, createdAt })
+  await addDoc(collection(db, '/posts'), {
+    contentPost,
+    userRef,
+    createdAt,
+    timestamp,
+  })
     .then(() => {
       CustomizedToast({ isSucess: true, text: 'Post adicionado!' })
     })

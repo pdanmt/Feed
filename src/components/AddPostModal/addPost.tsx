@@ -36,8 +36,9 @@ export function AddPost() {
   async function addPost({ contentPost }: addPostType) {
     const userRef = doc(db, 'users', user.uid)
     const createdAt = String(new Date())
+    const timestamp = new Date()
 
-    await AddPostAction({ contentPost, createdAt, userRef })
+    await AddPostAction({ contentPost, createdAt, userRef, timestamp })
 
     reset()
     onClose()

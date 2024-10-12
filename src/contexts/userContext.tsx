@@ -13,6 +13,7 @@ export interface userType {
 export interface postsBody {
   contentPost: string
   createdAt: string
+  timestamp: Date
   userName: string
   userProfilePhoto: string
   role: string
@@ -21,6 +22,7 @@ export interface postsBody {
 
 export interface commentsBody {
   createdAt: string
+  timestamp: Date
   userName: string
   contentComment: string
   likedBy: string[]

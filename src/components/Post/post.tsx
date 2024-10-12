@@ -35,6 +35,7 @@ export function Post({
 
   function addComment({ contentComment }: commentDataType) {
     const createdAt = String(new Date())
+    const timestamp = new Date()
     const userRef = doc(db, '/users', user.uid)
 
     AddComment({
@@ -43,6 +44,7 @@ export function Post({
       likedBy: [],
       userRef,
       postId: idOfPost,
+      timestamp,
     })
 
     reset()
@@ -106,9 +108,9 @@ export function Post({
                   id={id}
                 />
               )
+            } else {
+              return null
             }
-
-            return null
           },
         )}
       </div>

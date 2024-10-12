@@ -85,32 +85,33 @@ export async function signUp({
 export async function GetPosts(
   setPosts: React.Dispatch<React.SetStateAction<postsBody[]>>,
 ) {
-  const postsQuery = query(collection(db, 'posts'), orderBy('createdAt'))
+  const postsQuery = query(collection(db, 'posts'), orderBy('timestamp'))
 
   onSnapshot(postsQuery, (snapshot) => {
     snapshot.forEach(async (doc) => {
       const userRef = doc.data().userRef as DocumentReference<DocumentData>
       const poster = await getDoc(userRef)
 
-      const { createdAt, contentPost } = doc.data()
+      const { createdAt, contentPost, timestamp } = doc.data()
       const { role, userName, userPhoto } = poster.data() as userType
 
       setPosts((prev) => {
         if (prev.find(({ idOfPost }) => idOfPost === doc.id)) {
           return prev
+        } else {
+          return [
+            ...prev,
+            {
+              contentPost,
+              createdAt,
+              idOfPost: doc.id,
+              role,
+              userName,
+              userProfilePhoto: userPhoto,
+              timestamp,
+            },
+          ]
         }
-
-        return [
-          ...prev,
-          {
-            contentPost,
-            createdAt,
-            idOfPost: doc.id,
-            role,
-            userName,
-            userProfilePhoto: userPhoto,
-          },
-        ]
       })
     })
   })
@@ -122,6 +123,7 @@ interface addCommentProps {
   likedBy: string[]
   userRef: DocumentReference
   postId: string
+  timestamp: Date
 }
 
 export async function AddComment({
@@ -130,6 +132,7 @@ export async function AddComment({
   likedBy,
   userRef,
   postId,
+  timestamp,
 }: addCommentProps) {
   addDoc(collection(db, '/comments'), {
     contentComment,
@@ -137,13 +140,14 @@ export async function AddComment({
     likedBy,
     userRef,
     postId,
+    timestamp,
   })
 }
 
 export async function GetComments(
   setComments: React.Dispatch<React.SetStateAction<commentsBody[]>>,
 ) {
-  const commentsQuery = query(collection(db, 'comments'), orderBy('createdAt'))
+  const commentsQuery = query(collection(db, 'comments'), orderBy('timestamp'))
 
   onSnapshot(commentsQuery, (snapshot) => {
     snapshot.docChanges().forEach(async (change) => {
@@ -151,7 +155,7 @@ export async function GetComments(
         .userRef as DocumentReference<DocumentData>
       const poster = await getDoc(userRef)
 
-      const { createdAt, contentComment, likedBy, postId } =
+      const { createdAt, contentComment, likedBy, postId, timestamp } =
         change.doc.data() as commentsBody
       const { userName, userPhoto } = poster.data() as userType
 
@@ -159,20 +163,21 @@ export async function GetComments(
         setComments((prev) => {
           if (prev.find(({ id }) => id === change.doc.id)) {
             return prev
+          } else {
+            return [
+              ...prev,
+              {
+                contentComment,
+                createdAt,
+                id: change.doc.id,
+                userName,
+                likedBy,
+                postId,
+                userPhoto,
+                timestamp,
+              },
+            ]
           }
-
-          return [
-            ...prev,
-            {
-              contentComment,
-              createdAt,
-              id: change.doc.id,
-              userName,
-              likedBy,
-              postId,
-              userPhoto,
-            },
-          ]
         })
       } else if (change.type === 'removed') {
         setComments((prev) => prev.filter(({ id }) => id !== change.doc.id))
@@ -184,9 +189,9 @@ export async function GetComments(
             return produce(prev, (draft) => {
               draft[indexToChange].likedBy = likedBy
             })
+          } else {
+            return prev
           }
-
-          return prev
         })
       }
     })

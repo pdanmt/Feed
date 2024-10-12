@@ -30,9 +30,10 @@ export function ChoiceUserPhotoModal({ isInSignUp }: ChoiceUserPhotoProps) {
       await updateDoc(doc(db, '/users', user.uid), {
         userPhoto: userPhotoChosen,
       })
+    } else {
+      setUserPhoto(userPhotoChosen)
+      onClose()
     }
-    setUserPhoto(userPhotoChosen)
-    onClose()
   }
 
   return (

@@ -10,7 +10,6 @@ import { UserContext } from '../../contexts/userContext'
 import { DeleteComment } from '../../services/acess/userAcess'
 import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../firebase-config'
-import { produce } from 'immer'
 
 interface commentsProps {
   createdAt: string
@@ -29,30 +28,18 @@ export function Comment({
   userName,
   id,
 }: commentsProps) {
-  const { user, comments, setComments } = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   function liked() {
-    setComments(
-      comments.map((prev) => {
-        if (prev.likedBy.find((likeId) => likeId === user.uid)) {
-          updateDoc(doc(db, '/comments', id), {
-            likedBy: likes.filter((likeId) => likeId !== user.uid),
-          })
-          return produce(prev, (draft) => {
-            draft.likedBy = draft.likedBy.filter(
-              (likeId) => likeId !== user.uid,
-            )
-          })
-        }
-
-        updateDoc(doc(db, '/comments', id), {
-          likedBy: [...likes, user.uid],
-        })
-        return produce(prev, (draft) => {
-          draft.likedBy.push(user.uid)
-        })
-      }),
-    )
+    if (likes.find((likeId) => likeId === user.uid) === user.uid) {
+      updateDoc(doc(db, '/comments', id), {
+        likedBy: likes.filter((likeId) => likeId !== user.uid),
+      })
+    } else {
+      updateDoc(doc(db, '/comments', id), {
+        likedBy: [...likes, user.uid],
+      })
+    }
   }
 
   return (
