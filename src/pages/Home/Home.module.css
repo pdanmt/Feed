@@ -1,0 +1,24 @@
+.home {
+    max-width: 70rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 256px 1fr;
+    gap: 2rem;
+    align-items: flex-start;
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 830px) {
+    .home {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

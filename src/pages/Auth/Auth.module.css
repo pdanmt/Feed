@@ -1,0 +1,93 @@
+.authDiv {
+    width: 100vw;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    @media (max-width: 750px) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    aside {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: var(--gray-7);
+        padding: 1.5rem;
+
+        p {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .nameWithLogo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            img {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 750px) {
+            position: absolute;
+            padding: 0.5rem 0;
+            bottom: 0;
+            min-height: 7vh;
+            width: 100% ;
+            border-top: 2px solid var(--gray-4);
+            text-align: center;
+            justify-content: center;
+
+            p {
+                font-size: 1rem;
+            }
+
+            .nameWithLogo {
+                display: none;
+            }
+            
+        }
+    }
+
+    section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--gray-6);
+        text-align: center;
+
+        .authButton {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: transparent;
+            color: var(--gray-1);
+            padding: 0.5rem;
+            border: 1px solid var(--green);
+            border-radius: 6px;
+            transition: 0.2s;
+
+            &:hover {
+                cursor: pointer;
+                background: var(--green);
+                color: var(--white);
+            }
+        }
+
+        @media (max-width: 750px) {
+            min-height: 93vh;
+
+            .authButton {
+                top: 0.5rem;
+                right: 0.5rem;
+
+                &:hover {
+                    background: transparent;
+                }
+            }
+        }
+    }
+}

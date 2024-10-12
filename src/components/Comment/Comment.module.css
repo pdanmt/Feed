@@ -1,0 +1,111 @@
+.comment {
+    display: flex;
+    gap: 14px;
+
+    .container {
+        width: 100%;
+        word-break: break-all;
+
+        .commentContent {
+            background-color: var(--gray-5);
+            border-radius: 8px;
+            padding: 20px;
+
+            header {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: space-between;
+
+                .secFlex {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+
+                    .column {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.3rem;
+
+                        .userName {
+                            display: flex;
+                            align-items: center;
+                            gap: 0.5rem;
+
+                            strong {
+                                color: var(--white);
+                            }
+
+                            p {
+                                color: var(--gray-3);
+                            }
+                        }
+
+                        .date {
+                            font-size: 0.875rem;
+                            color: var(--gray-3);
+                        }
+                    }
+                }
+            }
+
+            .trashIcon {
+                font-size: 1.25rem;
+                color: var(--gray-3);
+                cursor: pointer;
+                transition: 0.2s;
+
+                &:hover {
+                    color: var(--red);
+                }
+            }
+        }
+
+        main {
+            align-items: flex-start;
+        }
+
+        footer {
+            margin-top: 20px;
+            display: flex;
+            gap: 6px;
+            align-items: flex-start;
+            cursor: pointer;
+            color: var(--gray-2);
+            transition: 0.2s;
+
+            &:hover {
+                color: var(--white);
+            }
+
+            .numberOfLikes::before {
+                content: "\2022";
+                padding-right: 6px;
+            }
+        }
+
+        .likedColor {
+            color: #00875f;
+        }
+
+        .noLikedColor {
+            color: #c4c4cc;
+        }
+    }
+}
+
+@media (max-width: 720px) {
+    .imageMediaQuery {
+        display: flex;
+    }
+
+    .imageNoneMediaQuery {
+        display: none;
+    }
+}
+
+@media (min-width: 721px) {
+    .imageMediaQuery {
+        display: none;
+    }
+}
