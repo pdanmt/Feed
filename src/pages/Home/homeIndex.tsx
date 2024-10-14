@@ -25,6 +25,7 @@ export function Home() {
             userName,
             idOfPost,
             userProfilePhoto,
+            timestamp,
           }) => (
             <Post
               key={idOfPost}
@@ -34,6 +35,7 @@ export function Home() {
               userName={userName}
               userProfilePhoto={userProfilePhoto}
               idOfPost={idOfPost}
+              timestamp={timestamp}
             />
           ),
         )}
