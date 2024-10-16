@@ -86,7 +86,7 @@ export function ChoiceUserPhotoModal({ isInSignUp }: ChoiceUserPhotoProps) {
           <ModalFooter>
             <Button
               bg="var(--red)"
-              color="var(--white)"
+              color="var(--default)"
               _hover={{ transition: '0.2s', filter: 'brightness(0.8)' }}
               onClick={onClose}
               type="button"

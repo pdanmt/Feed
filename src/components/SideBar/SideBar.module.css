@@ -37,6 +37,8 @@
         border-top: 2px solid var(--gray-5);
         padding: 1.25rem 2rem 2rem 2rem;
         width: 100%;
+        display: flex;
+        justify-content: center;
 
         .openModalBtn {
             display: flex;
@@ -53,7 +55,7 @@
 
             &:hover {
                 background-color: var(--green);
-                color: var(--white);
+                color: var(--default);
             }
         }
     }

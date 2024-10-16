@@ -1,26 +1,27 @@
-import { Textarea } from '@chakra-ui/react'
+import { Input, InputProps } from '@chakra-ui/react'
 import { useFormContext } from 'react-hook-form'
 
-interface UpdateProfileTextAreaProps {
+interface UpdateProfileInputProps extends InputProps {
   defaultValue: string
   registerName: string
 }
 
-export function UpdateProfileTextArea({
+export function UpdateProfileInput({
   defaultValue,
   registerName,
-}: UpdateProfileTextAreaProps) {
+  ...props
+}: UpdateProfileInputProps) {
   const { register } = useFormContext()
 
   return (
-    <Textarea
-      resize="none"
+    <Input
       variant="unstyled"
       border="1px solid var(--gray-3)"
       padding="0.5rem"
       fontSize="1.1rem"
       defaultValue={defaultValue}
       {...register(registerName)}
+      {...props}
     />
   )
 }

@@ -15,7 +15,7 @@ export function ModalFooterComponent({
     <ModalFooter display="flex" gap="1rem" justifyContent="right">
       <Button
         bg="var(--red)"
-        color="var(--white)"
+        color="var(--default)"
         _hover={{ transition: '0.2s', filter: 'brightness(0.8)' }}
         onClick={onClose}
         type="button"
@@ -24,7 +24,7 @@ export function ModalFooterComponent({
       </Button>
       <Button
         bg="var(--green)"
-        color="var(--white)"
+        color="var(--default)"
         _hover={{ transition: '0.2s', filter: 'brightness(1.2)' }}
         type="submit"
       >

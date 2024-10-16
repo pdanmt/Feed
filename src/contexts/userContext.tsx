@@ -1,5 +1,10 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
-import { GetComments, GetPosts, GetUser } from '../services/acess/userAcess'
+import {
+  GetAllUsers,
+  GetComments,
+  GetPosts,
+  GetUser,
+} from '../services/acess/userAcess'
 import photo from '../profilePhotos.json'
 
 export interface userType {
@@ -8,6 +13,9 @@ export interface userType {
   role: string
   uid: string
   userPhoto: string
+  bio: string
+  followedBy: string[]
+  following: string[]
 }
 
 export interface postsBody {
@@ -33,10 +41,12 @@ export interface commentsBody {
 
 interface userContextBody {
   user: userType
+  getUsers: userType[]
   posts: postsBody[]
   comments: commentsBody[]
   userPhoto: string
   setUser: React.Dispatch<React.SetStateAction<userType>>
+  setGetUsers: React.Dispatch<React.SetStateAction<userType[]>>
   setUserPhoto: React.Dispatch<React.SetStateAction<string>>
   setComments: React.Dispatch<React.SetStateAction<commentsBody[]>>
 }
@@ -49,12 +59,14 @@ export const UserContext = createContext({} as userContextBody)
 
 export function UserContextProvider({ children }: UserContextProps) {
   const [user, setUser] = useState({} as userType)
+  const [getUsers, setGetUsers] = useState<userType[]>([])
   const [posts, setPosts] = useState<postsBody[]>([])
   const [comments, setComments] = useState<commentsBody[]>([])
   const [userPhoto, setUserPhoto] = useState(photo[0].userPhoto)
 
   useEffect(() => {
     GetUser(setUser, setUserPhoto)
+    GetAllUsers(setGetUsers)
     GetPosts(setPosts)
     GetComments(setComments)
   }, [])
@@ -69,6 +81,8 @@ export function UserContextProvider({ children }: UserContextProps) {
         userPhoto,
         comments,
         setComments,
+        getUsers,
+        setGetUsers,
       }}
     >
       {children}

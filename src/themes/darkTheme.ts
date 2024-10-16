@@ -4,7 +4,7 @@ export const customTheme = extendTheme({
   styles: {
     global: {
       ':root': {
-        '--white': '#fff',
+        '--default': '#fff',
         '--gray-1': '#e1e1e6',
         '--gray-2': '#c4c4cc',
         '--gray-3': '#8d8d99',
@@ -13,7 +13,10 @@ export const customTheme = extendTheme({
         '--gray-6': '#202024',
         '--gray-7': '#121214',
         '--green': '#00875f',
+        '--green-2': '#1c8701',
+        '--green-3': '#6bd14f',
         '--red': '#F75A68',
+        '--red-2': '#c61a09',
       },
 
       '*': {
@@ -35,5 +38,10 @@ export const customTheme = extendTheme({
         fontSize: '1rem',
       },
     },
+  },
+  breakpoints: {
+    sm: '200px',
+    md: '830px',
+    lg: '1200px',
   },
 })

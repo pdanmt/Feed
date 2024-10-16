@@ -1,15 +1,15 @@
-import { SideBar } from '../../components/SideBar/sideBar'
-import { Post } from '../../components/Post/post'
-import { AddPost } from '../../components/AddPostModal/addPost'
 import { Box } from '@chakra-ui/react'
+import { SideBar } from '../../components/SideBar/sideBar'
+import { AddPost } from '../../components/AddPostModal/addPost'
 import { useContext } from 'react'
 import { UserContext } from '../../contexts/userContext'
+import { Post } from '../../components/Post/post'
 import { LoadingSpinner } from '../../components/LoadingSpinner/loading'
 
-export function Home() {
-  const { posts, user } = useContext(UserContext)
+export function FollowingPage() {
+  const { posts, user, getUsers } = useContext(UserContext)
 
-  if (!user.userName || !user.userPhoto || !user.role || !posts) {
+  if (!posts || !user.userPhoto || !getUsers) {
     return <LoadingSpinner />
   } else {
     return (
@@ -32,23 +32,32 @@ export function Home() {
             ({
               contentPost,
               createdAt,
-              role,
-              userName,
               idOfPost,
-              userProfilePhoto,
+              role,
               timestamp,
-            }) => (
-              <Post
-                key={idOfPost}
-                contentPost={contentPost}
-                createdAt={createdAt}
-                role={role}
-                userName={userName}
-                userProfilePhoto={userProfilePhoto}
-                idOfPost={idOfPost}
-                timestamp={timestamp}
-              />
-            ),
+              userName,
+              userProfilePhoto,
+            }) => {
+              const getUserId = getUsers.find(
+                (user) => user.userName === userName,
+              )
+              if (user.following.find((userId) => userId === getUserId?.uid)) {
+                return (
+                  <Post
+                    contentPost={contentPost}
+                    createdAt={createdAt}
+                    idOfPost={idOfPost}
+                    role={role}
+                    timestamp={timestamp}
+                    userName={userName}
+                    userProfilePhoto={userProfilePhoto}
+                    key={idOfPost}
+                  />
+                )
+              } else {
+                return null
+              }
+            },
           )}
         </Box>
       </Box>

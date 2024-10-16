@@ -13,6 +13,7 @@ import {
   DocumentData,
   DocumentReference,
   getDoc,
+  getDocs,
   onSnapshot,
   orderBy,
   query,
@@ -29,7 +30,8 @@ export function GetUser(
   const unsubscribe = onAuthStateChanged(auth, (user) => {
     if (user) {
       getDoc(doc(db, '/users', user.uid)).then((doc) => {
-        const { role, userName, userPhoto } = doc.data() as userType
+        const { role, userName, userPhoto, bio, followedBy, following } =
+          doc.data() as userType
         if (user.email) {
           setUser({
             email: user.email,
@@ -37,6 +39,9 @@ export function GetUser(
             uid: user.uid,
             userName,
             userPhoto,
+            bio,
+            followedBy,
+            following,
           })
           setUserPhoto(userPhoto)
         }
@@ -49,6 +54,16 @@ export function GetUser(
   })
 
   return () => unsubscribe()
+}
+
+export async function GetAllUsers(
+  setGetUsers: React.Dispatch<React.SetStateAction<userType[]>>,
+) {
+  getDocs(collection(db, '/users')).then((users) => {
+    users.forEach((doc) => {
+      setGetUsers((prev) => [...prev, doc.data() as userType])
+    })
+  })
 }
 
 interface loginProps {
@@ -68,6 +83,9 @@ interface signUpProps {
   userName: string
   role: string
   userPhoto: string
+  bio: string
+  followedBy: string[]
+  following: string[]
 }
 
 export async function signUp({
@@ -76,10 +94,21 @@ export async function signUp({
   role,
   userName,
   userPhoto,
+  bio,
+  followedBy,
+  following,
 }: signUpProps) {
   const { user } = await createUserWithEmailAndPassword(auth, email, password)
 
-  setDoc(doc(db, 'users', user.uid), { role, userName, userPhoto })
+  setDoc(doc(db, 'users', user.uid), {
+    role,
+    userName,
+    userPhoto,
+    bio,
+    followedBy,
+    following,
+    uid: user.uid,
+  })
 }
 
 export async function GetPosts(
@@ -199,5 +228,5 @@ export async function GetComments(
 }
 
 export async function DeleteComment(id: string) {
-  deleteDoc(doc(db, '/comments', id))
+  await deleteDoc(doc(db, '/comments', id))
 }

@@ -4,12 +4,11 @@
 
     .container {
         width: 100%;
-        word-break: break-all;
 
         .commentContent {
             background-color: var(--gray-5);
             border-radius: 8px;
-            padding: 20px;
+            padding: 1rem;
 
             header {
                 display: flex;
@@ -19,7 +18,9 @@
 
                 .secFlex {
                     display: flex;
-                    align-items: center;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    width: 100%;
                     gap: 6px;
 
                     .column {
@@ -32,8 +33,9 @@
                             align-items: center;
                             gap: 0.5rem;
 
+
                             strong {
-                                color: var(--white);
+                                color: var(--default);
                             }
 
                             p {
@@ -63,6 +65,7 @@
 
         main {
             align-items: flex-start;
+            word-break: break-all;
         }
 
         footer {
@@ -75,7 +78,7 @@
             transition: 0.2s;
 
             &:hover {
-                color: var(--white);
+                color: var(--default);
             }
 
             .numberOfLikes::before {
@@ -95,12 +98,29 @@
 }
 
 @media (max-width: 720px) {
-    .imageMediaQuery {
-        display: flex;
-    }
+    .comment {
+      .imageMediaQuery {
+          display: flex;
+      }
 
-    .imageNoneMediaQuery {
-        display: none;
+      .imageNoneMediaQuery {
+          display: none;
+      }
+
+      .container {
+        .commentContent {
+          header {
+            .secFlex {
+              .column {
+                .userName {
+                  flex-wrap: wrap;
+                    gap: 0;
+                }
+              }
+            }
+          }
+        }
+      }
     }
 }
 

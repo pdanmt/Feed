@@ -12,6 +12,7 @@ import { z } from 'zod'
 import { AddComment } from '../../services/acess/userAcess'
 import { doc } from 'firebase/firestore'
 import { db } from '../../firebase-config'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export function Post({
   contentPost,
@@ -22,6 +23,8 @@ export function Post({
   userProfilePhoto,
 }: postsBody) {
   const { user, comments } = useContext(UserContext)
+  const navigate = useNavigate()
+  const location = useLocation()
 
   const commentSchema = z.object({
     contentComment: z.string(),
@@ -50,11 +53,20 @@ export function Post({
     reset()
   }
 
+  function navigateToUserProfile() {
+    if (location.pathname !== '/user-profile') {
+      navigate(`/user-profile?user=${userName}`)
+    }
+  }
+
   return (
     <div className={styles.post}>
       {/* post */}
       <header>
-        <section className={styles.profile}>
+        <section
+          className={styles.profile}
+          onClick={() => navigateToUserProfile()}
+        >
           <UserImage img={userProfilePhoto} />
           <section>
             <strong className={styles.userName}>{userName}</strong>

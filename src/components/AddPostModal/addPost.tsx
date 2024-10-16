@@ -48,7 +48,7 @@ export function AddPost() {
     <>
       <Button
         bg="var(--green)"
-        color="var(--white)"
+        color="var(--default)"
         fontWeight="400"
         _hover={{ transition: '0.2s', filter: 'brightness(1.2)' }}
         onClick={onOpen}

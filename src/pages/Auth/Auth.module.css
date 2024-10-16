@@ -73,7 +73,7 @@
             &:hover {
                 cursor: pointer;
                 background: var(--green);
-                color: var(--white);
+                color: var(--default);
             }
         }
 
