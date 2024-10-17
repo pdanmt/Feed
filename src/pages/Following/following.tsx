@@ -37,6 +37,7 @@ export function FollowingPage() {
               timestamp,
               userName,
               userProfilePhoto,
+              uid,
             }) => {
               const getUserId = getUsers.find(
                 (user) => user.userName === userName,
@@ -52,6 +53,7 @@ export function FollowingPage() {
                     userName={userName}
                     userProfilePhoto={userProfilePhoto}
                     key={idOfPost}
+                    uid={uid}
                   />
                 )
               } else {
