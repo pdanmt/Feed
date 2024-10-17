@@ -23,6 +23,12 @@
                     width: 100%;
                     gap: 6px;
 
+                    .imgAndProfile {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.65rem;
+                    }
+
                     .column {
                         display: flex;
                         flex-direction: column;
@@ -78,7 +84,7 @@
             transition: 0.2s;
 
             &:hover {
-                color: var(--default);
+                color: var(--x);
             }
 
             .numberOfLikes::before {
@@ -99,28 +105,28 @@
 
 @media (max-width: 720px) {
     .comment {
-      .imageMediaQuery {
-          display: flex;
-      }
-
-      .imageNoneMediaQuery {
-          display: none;
-      }
-
-      .container {
-        .commentContent {
-          header {
-            .secFlex {
-              .column {
-                .userName {
-                  flex-wrap: wrap;
-                    gap: 0;
-                }
-              }
-            }
-          }
+        .imageMediaQuery {
+            display: flex;
         }
-      }
+
+        .imageNoneMediaQuery {
+            display: none;
+        }
+
+        .container {
+            .commentContent {
+                header {
+                    .secFlex {
+                        .column {
+                            .userName {
+                                flex-wrap: wrap;
+                                gap: 0.2rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 import { Menu as MenuIcon, Sun, UserRoundX } from 'lucide-react'
-import logoHeader from '../../images/logoHeader.png'
+import logoHeader from '../../../public/logo_feed.png'
 import {
   Box,
   Icon,
@@ -34,7 +34,7 @@ export function Header() {
       <Image
         alt=""
         src={logoHeader}
-        w={{ base: '30px', md: '40px', lg: '40px' }}
+        w={{ base: '50px', md: '60px', lg: '70px' }}
       />
       <Box display="flex" alignItems="center" gap="2rem" fontSize="1.1rem">
         <Text

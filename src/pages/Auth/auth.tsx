@@ -1,6 +1,7 @@
 import styles from './Auth.module.css'
-import logoImg from '../../images/logoHeader.png'
+import logoImg from '../../../public/logo_feed.png'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Image } from '@chakra-ui/react'
 
 export function AuthPage() {
   const location = useLocation()
@@ -11,7 +12,7 @@ export function AuthPage() {
       <aside>
         <p className={styles.nameWithLogo}>
           Ignite Feed
-          <img src={logoImg} alt="" />
+          <Image src={logoImg} alt="" w="70px" />
         </p>
         <p>Pedro Daniel &copy; todos os direitos reservados</p>
       </aside>

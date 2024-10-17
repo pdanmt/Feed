@@ -62,23 +62,25 @@ export function Comment({
         <section className={styles.commentContent}>
           <header>
             <section className={styles.secFlex}>
-              <div className={styles.imageMediaQuery}>
-                <UserImage hasBorder={false} img={userPhoto} />
-              </div>
-
-              <div className={styles.column}>
-                <div className={styles.userName}>
-                  <strong>{userName}</strong>
-                  <p>{userName === user.userName && '(você)'}</p>
+              <div className={styles.imgAndProfile}>
+                <div className={styles.imageMediaQuery}>
+                  <UserImage hasBorder={false} img={userPhoto} />
                 </div>
-                <time
-                  title={`Publicado em ${createdAt}`}
-                  dateTime={`publicado às ${createdAt}`}
-                  className={styles.date}
-                >
-                  Cerca de{' '}
-                  {formatDistanceToNow(new Date(createdAt), { locale: ptBR })}
-                </time>
+
+                <div className={styles.column}>
+                  <div className={styles.userName}>
+                    <strong>{userName}</strong>
+                    <p>{userName === user.userName && '(você)'}</p>
+                  </div>
+                  <time
+                    title={`Publicado em ${createdAt}`}
+                    dateTime={`publicado às ${createdAt}`}
+                    className={styles.date}
+                  >
+                    Cerca de{' '}
+                    {formatDistanceToNow(new Date(createdAt), { locale: ptBR })}
+                  </time>
+                </div>
               </div>
               {userName === user.userName && (
                 <>
