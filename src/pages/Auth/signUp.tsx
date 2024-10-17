@@ -11,15 +11,15 @@ import { UserContext } from '../../contexts/userContext'
 import { signUp } from '../../services/acess/userAcess'
 
 export function SignUp() {
-  const { userPhoto, getUsers } = useContext(UserContext)
+  const { userPhoto } = useContext(UserContext)
   const navigate = useNavigate()
 
   const signUpSchema = z.object({
-    userName: z.string(),
-    role: z.string(),
+    userName: z.string().trim(),
+    role: z.string().trim(),
     email: z.string(),
     password: z.string(),
-    bio: z.string(),
+    bio: z.string().trim(),
   })
 
   type signUpDataType = z.infer<typeof signUpSchema>
@@ -35,76 +35,68 @@ export function SignUp() {
     userName,
     bio,
   }: signUpDataType) {
-    if (getUsers.find((users) => users.userName === userName)) {
-      CustomizedToast({
-        isSucess: false,
-        text: 'Este nome de usuário já está sendo usado.',
-      })
-    } else {
-      signUp({
-        email,
-        password,
-        role,
-        userName,
-        userPhoto,
-        bio,
-        followedBy: [],
-        following: [],
-      })
-        .then(() => {
-          reset()
-          navigate('/', { replace: true })
-          CustomizedToast({
-            isSucess: true,
-            text: 'Cadastro realizado com sucesso!',
-          })
+    signUp({
+      email,
+      password,
+      role,
+      userName,
+      userPhoto,
+      bio,
+      followedBy: [],
+      following: [],
+    })
+      .then(() => {
+        reset()
+        navigate('/', { replace: true })
+        CustomizedToast({
+          isSucess: true,
+          text: 'Cadastro realizado com sucesso!',
         })
-        .catch((error) => {
-          if (error instanceof FirebaseError) {
-            switch (error.code) {
-              case 'auth/email-already-in-use':
-                CustomizedToast({
-                  isSucess: false,
-                  text: 'Este email já está em uso. Tente outro.',
-                })
-                break
-              case 'auth/invalid-email':
-                CustomizedToast({
-                  isSucess: false,
-                  text: 'O email informado é inválido.',
-                })
-                break
-              case 'auth/weak-password':
-                CustomizedToast({
-                  isSucess: false,
-                  text: 'A senha deve ter no mínimo 6 caracteres.',
-                })
-                break
-              default:
-                CustomizedToast({
-                  isSucess: false,
-                  text: 'Algo deu errado, tente novamente.',
-                })
-                console.error(`Erro Firebase: ${error.message}`)
-            }
-          } else {
-            console.error(`Algo inesperado aconteceu. Erro: ${error}`)
+      })
+      .catch((error) => {
+        if (error instanceof FirebaseError) {
+          switch (error.code) {
+            case 'auth/email-already-in-use':
+              CustomizedToast({
+                isSucess: false,
+                text: 'Este email já está em uso. Tente outro.',
+              })
+              break
+            case 'auth/invalid-email':
+              CustomizedToast({
+                isSucess: false,
+                text: 'O email informado é inválido.',
+              })
+              break
+            case 'auth/weak-password':
+              CustomizedToast({
+                isSucess: false,
+                text: 'A senha deve ter no mínimo 6 caracteres.',
+              })
+              break
+            default:
+              CustomizedToast({
+                isSucess: false,
+                text: 'Algo deu errado, tente novamente.',
+              })
+              console.error(`Erro Firebase: ${error.message}`)
           }
-        })
-    }
+        } else {
+          console.error(`Algo inesperado aconteceu. Erro: ${error}`)
+        }
+      })
   }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(handleSignUp)}>
       <p>Cadastre sua conta para acessar o feed!</p>
 
-      <ChoiceUserPhotoModal isInSignUp />
+      <ChoiceUserPhotoModal />
 
       <input
         type="text"
         required
         placeholder="Crie seu nome de usuário"
-        pattern="[a-zA-Z0-9-_]+"
         maxLength={20}
         {...register('userName')}
       />

@@ -122,7 +122,7 @@ export async function GetPosts(
       const poster = await getDoc(userRef)
 
       const { createdAt, contentPost, timestamp } = doc.data()
-      const { role, userName, userPhoto } = poster.data() as userType
+      const { role, userName, userPhoto, uid } = poster.data() as userType
 
       setPosts((prev) => {
         if (prev.find(({ idOfPost }) => idOfPost === doc.id)) {
@@ -138,6 +138,7 @@ export async function GetPosts(
               userName,
               userProfilePhoto: userPhoto,
               timestamp,
+              uid,
             },
           ]
         }

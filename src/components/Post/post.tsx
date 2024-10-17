@@ -21,6 +21,7 @@ export function Post({
   idOfPost,
   userName,
   userProfilePhoto,
+  uid,
 }: postsBody) {
   const { user, comments } = useContext(UserContext)
   const navigate = useNavigate()
@@ -55,7 +56,7 @@ export function Post({
 
   function navigateToUserProfile() {
     if (location.pathname !== '/user-profile') {
-      navigate(`/user-profile?user=${userName}`)
+      navigate(`/user-profile?user=${uid.slice(0, 14)}`)
     }
   }
 

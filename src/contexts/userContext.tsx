@@ -26,6 +26,7 @@ export interface postsBody {
   userProfilePhoto: string
   role: string
   idOfPost: string
+  uid: string
 }
 
 export interface commentsBody {

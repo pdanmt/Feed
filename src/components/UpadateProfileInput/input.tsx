@@ -21,6 +21,9 @@ export function UpdateProfileInput({
       fontSize="1.1rem"
       defaultValue={defaultValue}
       {...register(registerName)}
+      type="text"
+      maxLength={20}
+      isRequired
       {...props}
     />
   )

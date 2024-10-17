@@ -24,7 +24,7 @@ export function UsersProfile() {
         borderRadius="8px"
       >
         {getUsers.map(({ userName, bio, role, uid, userPhoto, followedBy }) => {
-          if (userName === queryUser) {
+          if (uid.slice(0, 14) === queryUser) {
             return (
               <Box key={uid}>
                 <Image
@@ -108,8 +108,8 @@ export function UsersProfile() {
                       w="100%"
                       letterSpacing="1px"
                     >
-                      {posts.find(({ userName }) => userName === queryUser)
-                        ? `Posts de ${userName}`
+                      {posts.find((user) => user.uid.slice(0, 14) === queryUser)
+                        ? `Posts de ${user.userName}`
                         : 'O usuário ainda não tem posts'}
                     </Text>
                     <Box
@@ -133,8 +133,9 @@ export function UsersProfile() {
                         userName,
                         userProfilePhoto,
                         timestamp,
+                        uid,
                       }) => {
-                        if (userName === queryUser) {
+                        if (uid.slice(0, 14) === queryUser) {
                           return (
                             <Post
                               contentPost={contentPost}
@@ -145,6 +146,7 @@ export function UsersProfile() {
                               userProfilePhoto={userProfilePhoto}
                               key={idOfPost}
                               timestamp={timestamp}
+                              uid={uid}
                             />
                           )
                         } else {

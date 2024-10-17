@@ -17,23 +17,17 @@ import { X } from 'phosphor-react'
 import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../firebase-config'
 
-interface ChoiceUserPhotoProps {
-  isInSignUp?: boolean
-}
-
-export function ChoiceUserPhotoModal({ isInSignUp }: ChoiceUserPhotoProps) {
+export function ChoiceUserPhotoModal() {
   const { isOpen, onClose, onOpen } = useDisclosure()
   const { userPhoto, setUserPhoto, user } = useContext(UserContext)
 
   async function handleChoicePhoto(userPhotoChosen: string) {
-    if (!isInSignUp) {
-      await updateDoc(doc(db, '/users', user.uid), {
-        userPhoto: userPhotoChosen,
-      })
-    } else {
-      setUserPhoto(userPhotoChosen)
-      onClose()
-    }
+    await updateDoc(doc(db, '/users', user.uid), {
+      userPhoto: userPhotoChosen,
+    })
+
+    setUserPhoto(userPhotoChosen)
+    onClose()
   }
 
   return (
