@@ -5,8 +5,8 @@ import { FollowOrUnfollowUser } from '../../services/actions/actions'
 import { useMutation } from 'react-query'
 
 interface FollowButtonProps {
-  uid: string
-  followedBy: string[]
+  uid?: string
+  followedBy?: string[]
 }
 
 export function FollowButton({ uid, followedBy }: FollowButtonProps) {
@@ -30,6 +30,8 @@ export function FollowButton({ uid, followedBy }: FollowButtonProps) {
         color: 'var(--default)',
       }}
       onClick={() =>
+        uid &&
+        followedBy &&
         followOrUnfollowUserFn({
           uidToFollow: uid,
           followedBy,
@@ -39,7 +41,7 @@ export function FollowButton({ uid, followedBy }: FollowButtonProps) {
         })
       }
     >
-      {user.following.find((userFollowed) => userFollowed === uid)
+      {uid && user.following.find((userFollowed) => userFollowed === uid)
         ? 'Seguindo'
         : 'Seguir'}
     </Button>

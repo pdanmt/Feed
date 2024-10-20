@@ -2,16 +2,18 @@ import styles from './SideBar.module.css'
 import { useContext } from 'react'
 import { UserContext } from '../../contexts/userContext'
 import { UpdateProfileModal } from '../UpdateProfileModal/updateProfileModal'
-import { ChoiceUserPhotoModal } from '../ChoiceUserPhotoModal/choiceUserPhotoModal'
+import { SendUserPhoto } from '../SendUserPhoto/sendUserPhoto'
 
 export function SideBar() {
-  const { user, userPhoto } = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   return (
     <aside className={styles.sideBar}>
-      <img src={userPhoto} alt="" className={styles.cover} />
+      <div className={styles.cover}>
+        <SendUserPhoto text="capa" place="sideBarCover" />
+      </div>
       <div className={styles.userImg}>
-        <ChoiceUserPhotoModal />
+        <SendUserPhoto place="sideBarUserPhoto" text="perfil" />
       </div>
 
       <div className={styles.profile}>

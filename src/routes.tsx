@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { PageBase } from './pages/PageBase/pageBase'
 import { Home } from './pages/Home/homeIndex'
-import { AuthPage } from './pages/Auth/auth'
 import { SignIn } from './pages/Auth/signIn'
 import { SignUp } from './pages/Auth/signUp'
 import { UsersProfile } from './pages/UsersProfile/usersProfile'
@@ -30,19 +29,14 @@ export const AppRoutes = createBrowserRouter([
     ],
   },
   {
-    path: '/',
-    element: <AuthPage />,
+    path: '/sign-up',
+    element: <SignUp />,
     errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/sign-in',
-        element: <SignIn />,
-      },
-      {
-        path: '/sign-up',
-        element: <SignUp />,
-      },
-    ],
+  },
+  {
+    path: '/sign-in',
+    element: <SignIn />,
+    errorElement: <ErrorPage />,
   },
   {
     path: '*',

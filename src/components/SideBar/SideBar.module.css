@@ -8,9 +8,13 @@
     position: relative;
 
     .cover {
-        height: 72px;
         width: 100%;
-        object-fit: cover;
+
+        img {
+            width: 100%;
+            height: 72px;
+            object-fit: cover;
+        }
     }
 
     .userImg {
@@ -27,12 +31,12 @@
         .name {
             font-weight: bold;
         }
-        
+
         .bio {
-            color: var(--gray-3);       
+            color: var(--gray-3);
         }
     }
-    
+
     footer {
         border-top: 2px solid var(--gray-5);
         padding: 1.25rem 2rem 2rem 2rem;

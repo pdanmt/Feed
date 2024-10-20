@@ -189,6 +189,7 @@ export async function DeleteAccountAction() {
           CustomizedToast({
             isSucess: false,
             text: 'Você precisa fazer login novamente para deletar esta conta.',
+            hasNavigateBtn: true,
           })
         }
       } else {
@@ -197,5 +198,33 @@ export async function DeleteAccountAction() {
     }
   } else {
     CustomizedToast({ isSucess: false, text: 'Nenhum usuário autenticado' })
+  }
+}
+
+interface UpdateUserPhotoProps {
+  user: userType | undefined
+  userPhoto: string
+}
+
+export async function UpdateUserPhoto({
+  user,
+  userPhoto,
+}: UpdateUserPhotoProps) {
+  if (user) {
+    await updateDoc(doc(db, '/users', user.uid), { userPhoto })
+  }
+}
+
+interface UpdateUserCoverProps {
+  user: userType | undefined
+  userCoverPhoto: string
+}
+
+export async function UpdateUserCoverPhoto({
+  user,
+  userCoverPhoto,
+}: UpdateUserCoverProps) {
+  if (user) {
+    await updateDoc(doc(db, '/users', user.uid), { userCoverPhoto })
   }
 }

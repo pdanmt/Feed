@@ -25,13 +25,19 @@ import { produce } from 'immer'
 
 export function GetUser(
   setUser: React.Dispatch<React.SetStateAction<userType>>,
-  setUserPhoto: React.Dispatch<React.SetStateAction<string>>,
 ) {
   const unsubscribe = onAuthStateChanged(auth, (user) => {
     if (user) {
       getDoc(doc(db, '/users', user.uid)).then((doc) => {
-        const { role, userName, userPhoto, bio, followedBy, following } =
-          doc.data() as userType
+        const {
+          role,
+          userName,
+          userPhoto,
+          userCoverPhoto,
+          bio,
+          followedBy,
+          following,
+        } = doc.data() as userType
         if (user.email) {
           setUser({
             email: user.email,
@@ -42,8 +48,8 @@ export function GetUser(
             bio,
             followedBy,
             following,
+            userCoverPhoto,
           })
-          setUserPhoto(userPhoto)
         }
       })
     } else {
@@ -83,6 +89,7 @@ interface signUpProps {
   userName: string
   role: string
   userPhoto: string
+  userCoverPhoto: string
   bio: string
   followedBy: string[]
   following: string[]
@@ -97,6 +104,7 @@ export async function signUp({
   bio,
   followedBy,
   following,
+  userCoverPhoto,
 }: signUpProps) {
   const { user } = await createUserWithEmailAndPassword(auth, email, password)
 
@@ -107,6 +115,7 @@ export async function signUp({
     bio,
     followedBy,
     following,
+    userCoverPhoto,
     uid: user.uid,
   })
 }
