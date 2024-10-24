@@ -120,7 +120,7 @@ export function UsersProfile() {
                         {posts.find(
                           (user) => user.uid.slice(0, 14) === queryUser,
                         )
-                          ? `Posts de ${user.userName}`
+                          ? `Posts de ${userName}`
                           : 'O usuário ainda não tem posts'}
                       </Text>
                       <Box
