@@ -13,6 +13,7 @@ import { AddComment } from '../../services/acess/userAcess'
 import { doc } from 'firebase/firestore'
 import { db } from '../../firebase-config'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { DeleteCommentOrPostModal } from '../deleteCommentOrPost/deleteComponentOrPost'
 
 export function Post({
   contentPost,
@@ -74,14 +75,21 @@ export function Post({
             <p className={styles.roleProfile}>{role}</p>
           </section>
         </section>
-        <time
-          title={`Publicado em :${createdAt}`}
-          dateTime={`Publicado às ${createdAt}`}
-          className={styles.date}
-        >
-          publicado há{' '}
-          {formatDistanceToNow(new Date(createdAt), { locale: ptBR })}
-        </time>
+        <section className={styles.timeAndDelete}>
+          <time
+            title={`Publicado em :${createdAt}`}
+            dateTime={`Publicado às ${createdAt}`}
+            className={styles.date}
+          >
+            publicado há{' '}
+            {formatDistanceToNow(new Date(createdAt), { locale: ptBR })}
+          </time>
+          <section className={styles.deletePost}>
+            {user.userName === userName && (
+              <DeleteCommentOrPostModal id={idOfPost} deletePost />
+            )}
+          </section>
+        </section>
       </header>
       <main>{contentPost}</main>
 

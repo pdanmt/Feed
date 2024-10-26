@@ -240,3 +240,7 @@ export async function GetComments(
 export async function DeleteComment(id: string) {
   await deleteDoc(doc(db, '/comments', id))
 }
+
+export async function DeletePost(id: string) {
+  await deleteDoc(doc(db, '/posts', id))
+}

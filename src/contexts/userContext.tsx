@@ -49,6 +49,7 @@ interface userContextBody {
   userCoverPhoto: string
   setUser: React.Dispatch<React.SetStateAction<userType>>
   setGetUsers: React.Dispatch<React.SetStateAction<userType[]>>
+  setPosts: React.Dispatch<React.SetStateAction<postsBody[]>>
   setUserPhoto: React.Dispatch<React.SetStateAction<string>>
   setUserCoverPhoto: React.Dispatch<React.SetStateAction<string>>
   setComments: React.Dispatch<React.SetStateAction<commentsBody[]>>
@@ -89,6 +90,7 @@ export function UserContextProvider({ children }: UserContextProps) {
         setGetUsers,
         setUserCoverPhoto,
         userCoverPhoto,
+        setPosts,
       }}
     >
       {children}
