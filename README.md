@@ -1,30 +1,54 @@
-# React + TypeScript + Vite
+<h1 align='center'>
+    Feed
+    <br />
+    <br />
+    <img src='public/cover.png'>
+</h1>
+<br />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Projeto 🎯
+Desenvolvi o [Feed](https://feed-pdd.vercel.app) com objetivo de aprendizado, pois queria ver se seria capaz de fazer um projeto maior. O código não está muito limpo, porém o resultado final até que ficou interessante.
 
-Currently, two official plugins are available:
+## Tecnologias 🧪
+O Feed foi desenvolovido com as seguintes tecnologias:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [React](https://react.dev/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Chakra UI](https://www.chakra-ui.com/)
+- [Firebase](https://firebase.google.com/)
 
-## Expanding the ESLint configuration
+## Como executar 
+Para executar o projeto localmente, siga os seguintes passos:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+```bash
+$ git clone https://github.com/pdanmt/Feed
 
-- Configure the top-level `parserOptions` property like this:
+$ cd Feed
+```
+Para inicializar o projeto, utilize o npm:
+```bash
+# Instale as dependências
+$ npm i
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+$ npm run dev
+```
+A aplicação será aberta no seu navegador padrão no endereço http://localhost:3000, caso a porta 3000 não esteja sendo utilizada.
+
+Além disso, será necessário que você crie um projeto firebase, utilizando do firebase firestore e authentication. Após isso, crie um arquivo .env.local ou .env na raiz do projeto e coloque as configurações do firebase, deste jeito:
+
+```bash
+VITE_API_KEY=<SUA_CHAVE>
+VITE_AUTH_DOMAIN=<SEU_DOMÍNIO_DE_AUTENTICAÇÃO>
+VITE_DATABASE_URL=<A_URL_DO_SEU_BANCO_DE_DADOS>
+VITE_PROJECT_ID=<O_ID_DO_SEU_PROJETO>
+VITE_STORAGE_BUCKET=<SEU_STORAGE_BUCKET>
+VITE_MESSAGING_SENDER_ID=<SEU_MESSAGING_SENDER_ID>
+VITE_APP_ID=<O_ID_DA_SUA_APLICAÇÃO>
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Layout 📝
+
+O design do Feed foi parcialmente desenvolvido pelo pessoal da [Rocketseat](https://www.rocketseat.com.br) e pode ser acessado no seguinte link:
+[Figma do projeto](https://www.figma.com/community/file/1113573231685349036/ignite-feed)
+
+---

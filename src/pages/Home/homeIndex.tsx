@@ -8,6 +8,7 @@ import { LoadingSpinner } from '../../components/LoadingSpinner/loading'
 
 export function Home() {
   const { posts, user } = useContext(UserContext)
+  console.log(user)
 
   if (!user.userName || !user.userPhoto || !user.role || !posts) {
     return <LoadingSpinner />
